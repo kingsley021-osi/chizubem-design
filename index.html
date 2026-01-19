@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chizubem Designs</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f8f9fb;color:#0b1c2d;opacity:0;transition:opacity 1s}
+
+/* HEADER */
+header{
+  background:#000;
+  padding:16px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05)
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:bold;
+  color: white;
+}
+
+.logo img{
+  height:36px;        /* perfect navbar size */
+  width:auto;
+  border-radius: 50%;
+  object-fit:contain;
+}
+
+.menu-toggle{display:none}
+nav{display:flex;gap:24px;align-items:center}
+a{text-decoration:none;color:white;transition:color 0.3s}
+a:hover{color:#0077cc}
+.btn{
+  padding:10px 18px;
+  border-radius:6px;
+  border:1px solid #0b1c2d;
+  cursor:pointer;
+  background:none;
+  transition:all 0.3s;
+  font-size:14px
+}
+.btn.primary{
+  background:#fff;
+  color:#0b1c2d;
+  font-weight: 600;
+  border:1px solid #0b1c2d
+
+}
+.btn.primary:hover{
+  background:#1a3c5a;
+  color: white;
+  transform:translateY(-2px);
+  box-shadow:0 4px 8px rgba(0,0,0,0.1)
+}
+
+/* HERO */
+.hero{
+  padding:100px 10% 80px;   /* more vertical, less horizontal */
+  display:flex;
+  gap:50px;
+  align-items:center;
+  flex-wrap:wrap;
+  background:
+    radial-gradient(circle at left,
+      rgba(11,28,45,0.04),
+      transparent 60%);
+}
+
+.hero-text{flex:1;min-width:300px}
+
+.hero-text .tagline{
+  display:inline-block;
+  background:#0b1c2d;
+  color:#fff;
+  padding:8px 16px;
+  border-radius:4px;
+  font-size:14px;
+  margin-bottom:20px
+}
+.hero-text h1{
+  font-size:48px;
+  margin-bottom:20px;
+  line-height:1.15;
+}
+
+.hero-text p{
+  font-size:17px;
+  max-width:520px;
+}
+
+
+.hero-img{
+  flex:1;
+  border-radius: 10px;
+  min-width:300px;
+  overflow: hidden  ;
+  max-width:460px;        /* slightly wider */
+  height:560px;           /* taller */
+  margin-left:auto;
+}
+
+
+.hero-img::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.05),
+    rgba(0,0,0,0.25)
+  );
+  pointer-events:none;
+}
+
+
+.hero-img img{
+  width:100%;
+  height:100%;
+  object-fit:contain;     /* KEY CHANGE */
+  background:#000;        /* optional: remove if unwanted */
+  transition:opacity 0.8s ease;
+}
+
+/* STATS */
+.stats{
+  background:#0b1c2d;
+  color:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:60px 8%;
+  flex-wrap:wrap
+}
+.stat{text-align:center;padding:20px}
+.stat h2{font-size:42px;margin-bottom:10px}
+.stat p{color:#ccc;font-size:16px}
+
+/* SECTION */
+.section{padding:80px 8%}
+.section h2{
+  font-size:32px;
+  margin-bottom:20px;
+  color:#0b1c2d;
+  text-align:center
+}
+
+/* SERVICES */
+.services{text-align:center}
+.service-list{
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:40px
+}
+.service{
+  background:#fff;
+  padding:40px 30px;
+  border-radius:14px;
+  width:280px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+  transition:transform 0.3s, box-shadow 0.3s
+}
+.service:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 40px rgba(0,0,0,.1)
+}
+.service h3{
+  margin-top:20px;
+  color:#0b1c2d
+}
+
+/* WORK SLIDER */
+.work-slider{
+  overflow:hidden;
+  margin-top:40px;
+  position:relative
+}
+.work-wrapper{
+  overflow:hidden;
+  padding:20px 0
+}
+.work-track{
+  display:flex;
+  gap:30px;
+  will-change:transform;
+  animation:scrollWork 30s linear infinite
+}
+.work-item{
+  width:300px;
+  height:400px;
+  border-radius:14px;
+  overflow:hidden;
+  flex-shrink:0;
+  position:relative
+}
+.work-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.5s
+}
+.work-item:hover img{
+  transform:scale(1.05)
+}
+
+@keyframes scrollWork {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-300px * 8 - 30px * 7)); }
+}
+
+/* REVIEWS */
+.reviews{
+  background:#fff;
+  padding:50px;
+  border-radius:18px;
+  max-width:850px;
+  margin:auto;
+  box-shadow:0 20px 40px rgba(0,0,0,.06);
+  display:flex;
+  gap:40px;
+  align-items:center;
+  flex-wrap:wrap;
+  position:relative
+}
+.review-img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  overflow:hidden;
+  border:4px solid #f0f0f0
+}
+.review-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+.review-text{flex:1}
+.review-text p{
+  font-size:18px;
+  line-height:1.8;
+  color:#333;
+  margin-bottom:20px
+}
+.review-text h4{
+  color:#0b1c2d;
+  font-size:20px
+}
+
+/* CONTACT */
+.contact-container{
+  display:flex;
+  gap:60px;
+  flex-wrap:wrap;
+  max-width:1200px;
+  margin:0 auto
+}
+.contact-info{
+  flex:1;
+  min-width:300px;
+  padding:40px;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05)
+}
+.contact-info h2{
+  text-align:left;
+  margin-bottom:30px
+}
+.contact-info p{
+  margin:20px 0;
+  font-size:16px;
+  color:#555
+}
+.contact-form{
+  flex:1;
+  min-width:300px;
+  background:#fff;
+  padding:40px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05)
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:20px
+}
+form input,select, form textarea{
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:16px;
+  transition:border-color 0.3s
+}
+form input:focus, form textarea:focus{
+  outline:none;
+  border-color:#0b1c2d
+}
+form textarea{
+  min-height:150px;
+  resize:vertical
+}
+form button{
+  align-self:flex-start;
+  margin-top:10px
+}
+
+/* FOOTER */
+footer{
+  background:#0b1c2d;
+  color:#fff;
+  padding:60px 8% 40px;
+  margin-top:60px
+}
+.footer-content{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:40px;
+  margin-bottom:40px
+}
+.footer-icons{
+  display:flex;
+  gap:20px
+}
+.footer-icons a{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all 0.3s
+}
+.footer-icons a:hover{
+  background:#fff;
+  transform:translateY(-3px)
+}
+.footer-icons svg{
+  width:24px;
+  height:24px;
+  fill:#fff;
+  transition:fill 0.3s
+}
+.footer-icons a:hover svg{
+  fill:#0b1c2d
+}
+.copyright{
+  text-align:center;
+  padding-top:40px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  color:#ccc
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .menu-toggle{
+    display:block;
+    background:none;
+    border:none;
+    color: white;
+    font-size:24px;
+    cursor:pointer
+  }
+  nav{
+    display:none;
+    position:fixed;
+    top:70px;
+    left:0;
+    right:0;
+    background:#000;
+    flex-direction:column;
+    padding:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    z-index:100
+  }
+  nav.active{
+    display:flex
+  }
+  .hero{
+    padding:70px 6% 60px;
+    gap:40px;
+    text-align:center;
+  }
+
+  .hero-text h1{
+    font-size:34px;
+  }
+
+  .hero-text p{
+    max-width:100%;
+  }
+
+  .hero-img{
+    height:440px;
+    max-width:100%;
+    margin:0 auto;
+  }
+    @media(max-width:768px){
+    .hero-img{
+        height:420px;
+        max-width:100%;
+        margin:0 auto;
+    }
+    }
+
+  .stat h2{font-size:32px}
+  .section{padding:60px 5%}
+  .service{width:100%}
+  .work-item{width:280px;height:350px}
+  .reviews{padding:30px;gap:30px}
+  .review-img{width:100px;height:100px}
+  .contact-container{gap:40px}
+  .contact-info, .contact-form{padding:30px}
+  .footer-content{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="./19.jpeg" alt="Chizubem Designs Logo">
+        <span>Chizubem Designs</span>
+    </div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="mainNav">
+    <a href="#work" onclick="closeMenu()">Work</a>
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#reviews" onclick="closeMenu()">Reviews</a>
+    <button class="btn primary" onclick="scrollToContact()">Work With Us</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Chizubem Designs</h1>
+    <p class="tagline">PIXEL AND PROSE</p>
+    <p>Premium, modern and minimal design solutions that transform your vision into reality. We create designs that not only look beautiful but also drive results.</p>
+    <button class="btn primary" style="margin-top:20px" onclick="scrollToContact()">Start Your Project</button>
+  </div>
+  <div class="hero-img">
+    <img id="heroImage" src="./8.jpeg" alt="Design workspace">
+  </div>
+</section>
+
+<section class="stats" id="stats">
+  <div class="stat"><h2 data-target="5">0</h2><p>Years Experience</p></div>
+  <div class="stat"><h2 data-target="150">0</h2><p>Projects Completed</p></div>
+  <div class="stat"><h2 data-target="80">0</h2><p>Happy Clients</p></div>
+  <div class="stat"><h2 data-target="100">0</h2><p>Design Awards</p></div>
+</section>
+
+<section class="section services" id="services">
+  <h2>Our Services</h2>
+  <div class="service-list">
+    <div class="service">
+      <h3>Graphic Design</h3>
+      <p>Stunning visuals that communicate your message effectively</p>
+    </div>
+    <div class="service">
+      <h3>Brand Identity</h3>
+      <p>Complete brand packages that stand out in the market</p>
+    </div>
+    <div class="service">
+      <h3>UI / UX Design</h3>
+      <p>User-centered digital experiences that convert</p>
+    </div>
+    <div class="service">
+      <h3>Project Writing</h3>
+      <p>Compelling content that tells your story</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <h2>Selected Work</h2>
+  <div class="work-slider">
+    <div class="work-wrapper">
+      <div class="work-track" id="workTrack"></div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="section" id="reviews">
+  <h2>Client Reviews</h2>
+  <div class="reviews">
+    <div class="review-img"><img id="reviewImg" alt="Client photo"></div>
+    <div class="review-text">
+      <p id="reviewText"></p>
+      <h4 id="reviewName"></h4>
+      <p class="review-role" id="reviewRole"></p>
+    </div>
+  </div>
+</section> -->
+
+<section class="section" id="contact">
+  <h2>Let's Work Together</h2>
+  <div class="contact-container">
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+      <p><strong>Email:</strong> chizubemdesign@gmail.com</p>
+      <p><strong>Phone:</strong> +234 902 377 5051</p>
+      <p><strong>Location:</strong> Lagos, Nigeria</p>
+      <p><strong>Working Hours:</strong> Mon - Fri, 9AM - 6PM</p>
+      <div style="margin-top:40px">
+        <h3>Why Work With Us?</h3>
+        <p>• Premium quality designs</p>
+        <p>• Fast turnaround times</p>
+        <p>• Dedicated project manager</p>
+        <p>• Unlimited revisions</p>
+        <p>• 24/7 support</p>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Start Your Project</h3>
+        <form id="contactForm" action="https://formsubmit.co/chizubemsdesigns@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number">
+        <select name="service" required>
+            <option value="">Select Service</option>
+            <option>Graphic Design</option>
+            <option>Brand Identity</option>
+            <option>UI/UX Design</option>
+            <option>Project Writing</option>
+            <option>Multiple Services</option>
+        </select>
+        <textarea name="message" placeholder="Tell us about your project..." required></textarea>
+        <button type="submit" class="btn primary">Send Message</button>
+        </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div>
+        <div class="logo">
+            <img src="./19.jpeg" style="margin-bottom:20px" alt="Chizubem Designs Logo">
+            <span style="margin-bottom:17px">Chizubem Designs</span>
+        </div>
+      <p>Creating designs that inspire and convert.</p>
+    </div>
+    <div class="footer-icons">
+      <a href="https://wa.me/2349023775051" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.94 14.5L2 22l5.65-1.48A10 10 0 1 0 12 2z"/></svg>
+      </a>
+      <a href="tel:+2349023775051" aria-label="Phone">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.4 22 2 13.6 2 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.6 3.6a1 1 0 0 1-.25 1z"/></svg>
+      </a>
+      <a href="mailto:chizubemdesign@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2z"/><path d="M22 4 12 13 2 4"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="copyright">
+    <p>&copy; 2024 Chizubem Designs. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* PAGE FADE */
+window.addEventListener('load', () => {
+  document.body.style.opacity = '1';
+});
+
+/* MOBILE MENU */
+function toggleMenu() {
+  document.getElementById('mainNav').classList.toggle('active');
+}
+
+function closeMenu() {
+  document.getElementById('mainNav').classList.remove('active');
+}
+
+/* HERO SLIDER */
+const heroImages = [
+  './10.jpeg',
+  './1.jpeg',
+  './2.jpeg',
+  './3.jpeg'
+];
+let heroIndex = 0;
+const heroImage = document.getElementById('heroImage');
+
+function changeHeroImage() {
+  heroImage.style.opacity = 0;
+  setTimeout(() => {
+    heroIndex = (heroIndex + 1) % heroImages.length;
+    heroImage.src = heroImages[heroIndex];
+    heroImage.style.opacity = 1;
+  }, 600);
+}
+
+// Start hero slider after page loads
+setTimeout(() => {
+  setInterval(changeHeroImage, 5000);
+}, 1000);
+
+/* STATS COUNTER */
+let statsPlayed = false;
+const statsObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting && !statsPlayed) {
+    statsPlayed = true;
+    document.querySelectorAll('.stat h2').forEach(stat => {
+      const target = parseInt(stat.dataset.target);
+      let count = 0;
+      const duration = 2000; // 2 seconds
+      const increment = target / (duration / 16); // 60fps
+      
+      const updateCount = () => {
+        count += increment;
+        if (count < target) {
+          stat.textContent = Math.floor(count) + '+';
+          requestAnimationFrame(updateCount);
+        } else {
+          stat.textContent = target + '+';
+        }
+      };
+      updateCount();
+    });
+  }
+}, { threshold: 0.3 });
+
+statsObserver.observe(document.getElementById('stats'));
+
+/* WORK SLIDER - DUPLICATE ITEMS FOR SEAMLESS SCROLL */
+const works = [
+  './12.jpeg',
+  './11.jpeg',   
+    './10.jpeg',
+    './1.jpeg',
+    './2.jpeg',
+    './3.jpeg',
+    './4.jpeg',
+    './9.jpeg',
+    './8.jpeg',
+];
+
+const workTrack = document.getElementById('workTrack');
+
+// Duplicate items for seamless infinite scroll
+works.forEach(img => {
+  workTrack.innerHTML += `
+    <div class="work-item">
+      <img src="${img}" alt="Design work">
+      <div style="position:absolute;bottom:0;background:rgba(0,0,0,0.7);color:white;width:100%;padding:15px">
+        <p style="margin:0;font-size:14px">Project Preview</p>
+      </div>
+    </div>
+  `;
+});
+
+// Add duplicate for seamless loop
+works.forEach(img => {
+  workTrack.innerHTML += `
+    <div class="work-item">
+      <img src="${img}" alt="Design work">
+      <div style="position:absolute;bottom:0;background:rgba(0,0,0,0.7);color:white;width:100%;padding:15px">
+        <p style="margin:0;font-size:14px">Project Preview</p>
+      </div>
+    </div>
+  `;
+});
+
+/* REVIEWS */
+const reviews = [
+  {
+    name: "Emeka Johnson",
+    text: "Chizubem Designs transformed my brand identity completely. Their attention to detail and creative approach exceeded all expectations. The new brand identity increased our customer engagement by 40% in just three months.",
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    role: "CEO, TechVille Solutions"
+  },
+  {
+    name: "Blessing Okafor",
+    text: "The UI/UX design provided by Chizubem Designs was exceptional. Our app's user retention increased by 60% after implementing their designs. Professional, creative, and always on time!",
+    img: "https://images.unsplash.com/photo-1494790108755-2616b786d4d8",
+    role: "Product Manager, InnovateApp"
+  },
+  {
+    name: "David Chen",
+    text: "Outstanding graphic design work! They understood our vision perfectly and delivered designs that perfectly represent our company values. Highly recommended for any design needs.",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+    role: "Marketing Director, GlobalTech"
+  }
+];
+
+let reviewIndex = 0;
+const reviewImg = document.getElementById('reviewImg');
+const reviewText = document.getElementById('reviewText');
+const reviewName = document.getElementById('reviewName');
+const reviewRole = document.getElementById('reviewRole');
+
+function loadReview() {
+  const review = reviews[reviewIndex];
+  reviewImg.src = review.img;
+  reviewText.textContent = review.text;
+  reviewName.textContent = review.name;
+  reviewRole.textContent = review.role;
+}
+
+loadReview();
+
+setInterval(() => {
+  reviewIndex = (reviewIndex + 1) % reviews.length;
+  loadReview();
+}, 8000);
+
+
+/* SMOOTH SCROLL */
+function scrollToContact() {
+  closeMenu(); // Close mobile menu if open
+  document.getElementById('contact').scrollIntoView({ 
+    behavior: 'smooth',
+    block: 'start'
+  });
+}
+
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
